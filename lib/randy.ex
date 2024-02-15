@@ -1,18 +1,15 @@
 defmodule Randy do
-  @moduledoc """
-  Documentation for `Randy`.
-  """
+  use GenServer
 
-  @doc """
-  Hello world.
+  @impl true
+  def init(max) do
+    {:ok, max}
+  end
 
-  ## Examples
-
-      iex> Randy.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  # gen server will call handle_call
+  # every time a message happens
+  @impl true
+  def handle_call(:rand, _from, max) do
+    {:reply, :rand.uniform(max), max}
   end
 end
